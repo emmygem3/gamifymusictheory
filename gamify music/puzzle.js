@@ -16,7 +16,7 @@ window.onload = function () {
      *   'placedImage': number
      * }
      */
-    blanks.push({ index: i, placedImage: -1 }); // puts blank images (named 1-25) into the array
+    blanks.push({ index: i, placedImage: -1 }); // puts objects named 1-25 into the index, and a placeholder number (-1) in placedImage
   }
 
   for (let i = 0; i < blanks.length; i++) {
@@ -24,12 +24,12 @@ window.onload = function () {
     tile.src = "./puzpics/blanks/" + blanks[i].index + ".jpg";
 
     // lets user drag pieces
-    // tile.addEventListener("dragstart", dragStart); // user clicks on image to drop
+    tile.addEventListener("dragstart", dragStart); // user clicks on image to drop
     tile.addEventListener("dragover", dragOver); // user drags an image
-    // tile.addEventListener("dragenter", dragEnter); // user drags an image into another one
-    // tile.addEventListener("dragleave", dragLeave); // user drags an image away from another one
+    tile.addEventListener("dragenter", dragEnter); // user drags an image into another one
+    tile.addEventListener("dragleave", dragLeave); // user drags an image away from another one
     tile.addEventListener("drop", dragDrop); // user drops image onto another one
-    // tile.addEventListener("dragend", dragEnd); // after user completes dragDrop (swaps the two images)
+    tile.addEventListener("dragend", dragEnd); // after user completes dragDrop (swaps the two images)
 
     document.getElementById("board").append(tile);
   }
@@ -86,19 +86,6 @@ function dragDrop() {
   otherTile = this; // this refers to image that is being dropped on
 }
 
-function getLastIndex(url) {
-  //   Update blanks array to have the number of the image we placed in it
-  const forwardSlashSplit = url.split("/");
-
-  //   Get the last item in the array
-  const lastItem = forwardSlashSplit[forwardSlashSplit.length - 1];
-
-  // replace .jpg
-  const lastItemIndex = lastItem.replace(".jpg", "");
-
-  return lastItemIndex;
-}
-
 function dragEnd() {
   if (currentTile.src.includes("blank")) {
     return;
@@ -110,13 +97,92 @@ function dragEnd() {
   otherTile.src = currentImg;
 
   // Update the blanks array object, at this index, to have the image i placed in.
-  const currentImageLastIndex = getLastIndex(currentImg);
-  const currentOtherLastIndex = getLastIndex(otherImg);
+  let currentImageLastIndex = getLastIndex(currentImg);
+  let currentOtherLastIndex = getLastIndex(otherImg);
+
+  const imageIndex = findPlacedImageIndex(currentImageLastIndex);
+  const otherIndex = findOtherImageIndex(currentOtherLastIndex);
 
   //   update the blanks array at this index to have the new images number
-  blanks[currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
+  //   if (currentTile.src.includes("blank")) {
+  //     blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
+  //     //blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
+  //     if (imageIndex !== -1) {
+  //       blanks[+imageIndex - 1].placedImage = -1;
+  //     }
+  //   }
+
+  if (currentTile.src.includes("blanks")) {
+    for (let i = 0; i < blanks.length; i++) {
+      if (blanks[i].placedImage !== currentImageLastIndex) {
+        //blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
+        blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
+        break;
+      } else {
+        //blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
+        blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
+        break;
+      }
+    }
+    if (imageIndex !== -1) {
+      blanks[+imageIndex - 1].placedImage = -1;
+    }
+  }
+
+  if (currentTile.src.includes("beethoven")) {
+    blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
+    blanks[+imageIndex - 1].placedImage = +currentOtherLastIndex;
+  }
+
+  console.log(blanks);
+  console.log(currentImageLastIndex);
+  console.log(currentOtherLastIndex);
+  console.log(imageIndex);
+  console.log(otherIndex);
 
   validate();
+}
+
+// function alreadyOnBoard(currentImageLastIndex) {
+//   for (let i = 0; i < blanks.length; i++) {
+//     if (blanks[i].placedImage == currentImageLastIndex) {
+//       blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
+//     } else {
+//       blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
+//     }
+//   }
+//   return -1; // Return -1 if the desired condition is not found
+// }
+
+function findPlacedImageIndex(currentImageLastIndex) {
+  for (let i = 0; i < blanks.length; i++) {
+    if (blanks[i].placedImage == currentImageLastIndex) {
+      return blanks[i].index;
+    }
+  }
+  return -1; // Return -1 if the desired condition is not found
+}
+
+function findOtherImageIndex(currentOtherLastIndex) {
+  for (let i = 0; i < blanks.length; i++) {
+    if (blanks[i].placedImage == currentOtherLastIndex) {
+      return blanks[i].index;
+    }
+  }
+  return -1; // Return -1 if the desired condition is not found
+}
+
+function getLastIndex(url) {
+  //   Update blanks array to have the number of the image we placed in it
+  const forwardSlashSplit = url.split("/");
+
+  //   Get the last item in the array
+  const lastItem = forwardSlashSplit[forwardSlashSplit.length - 1];
+
+  // replace .jpg
+  const lastItemIndex = lastItem.replace(".jpg", "");
+
+  return lastItemIndex;
 }
 
 function validate() {
