@@ -22,6 +22,7 @@ window.onload = function () {
   for (let i = 0; i < blanks.length; i++) {
     let tile = document.createElement("img");
     tile.src = "./puzpics/blanks/" + blanks[i].index + ".jpg";
+    tile.id = blanks[i].index;
 
     // lets user drag pieces
     tile.addEventListener("dragstart", dragStart); // user clicks on image to drop
@@ -93,40 +94,37 @@ function dragEnd() {
 
   let currentImg = currentTile.src;
   let otherImg = otherTile.src;
+
   currentTile.src = otherImg;
   otherTile.src = currentImg;
 
-  // Update the blanks array object, at this index, to have the image i placed in.
+  // Update the blanks array object, at this index, to have the image placed in.
   let currentImageLastIndex = getLastIndex(currentImg);
   let currentOtherLastIndex = getLastIndex(otherImg);
 
   const imageIndex = findPlacedImageIndex(currentImageLastIndex);
   const otherIndex = findOtherImageIndex(currentOtherLastIndex);
 
-  //   update the blanks array at this index to have the new images number
-  //   if (currentTile.src.includes("blank")) {
-  //     blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
-  //     //blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
-  //     if (imageIndex !== -1) {
-  //       blanks[+imageIndex - 1].placedImage = -1;
-  //     }
-  //   }
+  //   console.log("Current Image Index: ", imageIndex);
+  //   console.log("Other Image Index: ", otherIndex);
 
   if (currentTile.src.includes("blanks")) {
-    for (let i = 0; i < blanks.length; i++) {
-      if (blanks[i].placedImage !== currentImageLastIndex) {
-        //blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
-        blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
-        break;
-      } else {
-        //blanks[+currentOtherLastIndex - 1].placedImage = +currentImageLastIndex;
-        blanks[+otherIndex - 1].placedImage = +currentImageLastIndex;
-        break;
-      }
+    console.log("CurrentOtherLastIndex: ", currentOtherLastIndex);
+    console.log("currentImageLastIndex", currentImageLastIndex);
+
+    console.log("Current Tile ID: ", currentTile.id);
+    console.log("Other Tile ID: ", otherTile.id);
+
+    // set the current tile (the blank one) to be its own image
+    if (currentTile.id) {
+      // resetting
+      blanks[currentTile.id - 1].placedImage = -1;
     }
-    if (imageIndex !== -1) {
-      blanks[+imageIndex - 1].placedImage = -1;
-    }
+    blanks[+otherTile.id - 1].placedImage = +currentImageLastIndex;
+    // Resets the blanks at a given index to be -1
+    // if (imageIndex !== -1) {
+    //   blanks[+imageIndex - 1].placedImage = -1;
+    // }
   }
 
   if (currentTile.src.includes("beethoven")) {
@@ -135,10 +133,10 @@ function dragEnd() {
   }
 
   console.log(blanks);
-  console.log(currentImageLastIndex);
-  console.log(currentOtherLastIndex);
-  console.log(imageIndex);
-  console.log(otherIndex);
+  //   console.log(currentImageLastIndex);
+  //   console.log(currentOtherLastIndex);
+  //   console.log(imageIndex);
+  //   console.log(otherIndex);
 
   validate();
 }
@@ -196,8 +194,7 @@ function validate() {
   }
 
   if (isSolved) {
-    alert("Puzzle complete!");
-    window.location.href = "index.html";
+    window.location.href = "puzzleSolved.html";
   }
 }
 
