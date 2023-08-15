@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="main.css">
 
 <head>
     <title>Gamify Music Theory (GMT)</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 
-<form action="noteSelect.html">
-    <div class="easy-start-screen">
-         <button id="start-button" type="submit" >Easy</button><br><br>
-    </div>
-</form>
+<body>
 
-<form action="noteSelect.html">
-    <div class="medium-start-screen">
-         <button id="start-button" type="submit">Medium</button><br><br>
-    </div>
-</form>
+    <h1>Select a difficulty:</h1>
 
-<form action="noteSelect.html">
-    <div class="hard-start-screen">
-         <button id="start-button" type="submit">Hard</button><br><br>
+    <div class="difficulty">
+         <button id="easy-start-button" type="submit" onclick="window.location.href = 'noteSelectEasy.html'";>Easy</button><br><br><br>
+         <button id="medium-start-button" type="submit" onclick="window.location.href = 'noteSelectMed.html'";>Medium</button><br><br><br>
+         <button id="hard-start-button" type="submit" onclick="window.location.href = 'noteSelectHard.html'";>Hard</button>
     </div>
-</form>
+
+</body>
 
 </html>

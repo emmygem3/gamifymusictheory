@@ -5,6 +5,7 @@ footer {
   color: black;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 105px;
   overflow: hidden;
 }
 
@@ -17,6 +18,14 @@ p {
   margin-top:3px;
   margin-bottom:6px;
   color: white;
+}
+
+h1 {
+  font-family: gill sans, sans-serif;
+  font-size: 45px;
+  text-align: center;
+  margin-top: 7%;
+  color:#10ad9b
 }
 
 .affirm {
@@ -47,11 +56,20 @@ button {
     border: 2px solid #23bdb5;
     color: black;
   }
+
+  .difficulty {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
   
   .notes {
     margin: 0;
     position: absolute;
-    top: 74%;
+    top: 70.5%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
