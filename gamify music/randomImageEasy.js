@@ -116,11 +116,15 @@ function answerB() {
 }
 
 function correct() {
-  document.getElementById("correctness").innerHTML = "Correct!";
+  let string = "Correct!";
+  document.getElementById("correctness").innerHTML =
+    string.fontcolor("#4bd6c2");
 }
 
 function incorrect() {
-  document.getElementById("correctness").innerHTML = "Incorrect!";
+  let string = "Incorrect!";
+  document.getElementById("correctness").innerHTML =
+    string.fontcolor("#db4f4f");
 }
 
 let tallyNum = 0;

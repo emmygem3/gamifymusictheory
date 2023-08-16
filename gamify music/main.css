@@ -1,22 +1,14 @@
-footer {
-  align-content: center;
-  font-size: 16px;
-  background-color: #1CD2BE;
-  color: black;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 105px;
-  overflow: hidden;
+html {
+  background:#FFFFFF
 }
-
 p {
   text-align: center;
   font-family: gill sans, sans-serif;
-  font-size: 18px;
+  font-size: 21px;
   margin-left: auto;
   margin-right: auto;
   margin-top:3px;
-  margin-bottom:6px;
+  margin-bottom:8px;
   color: white;
 }
 
@@ -25,26 +17,33 @@ h1 {
   font-size: 45px;
   text-align: center;
   margin-top: 7%;
-  color:#10ad9b
+  color:#02b1a5;
 }
 
-.affirm {
+h3 {
+  text-align: center;
+  position: absolute;
+  top: 75.4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: gill sans, sans-serif;
   font-style: italic;
+  font-size: 21px;
 }
 
 img{
-  display:block;
+  display:flex;
 }
 
 button {
-    background-color: #1CD2BE;
+    background-color: #34DEC5;
     border: none;
     border-radius: 32px;
     color: white;
     cursor: pointer;
     display: inline-block;
     font-size: 16px;
-    margin: 7px 7px;
+    margin: 7px 7px 7px 7px;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -67,12 +66,11 @@ button {
   }
   
   .notes {
-    margin: 0;
     position: absolute;
-    top: 70.5%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    top: 70%;
   }
 
   .begin{
@@ -88,3 +86,25 @@ button {
   .p {
     text-align: center;
   }
+
+  #footer {
+    align-content: center;
+    position: fixed;
+    font-size: 16px;
+    background-color: #02c5b9;
+    color: black;
+    overflow: hidden;
+    margin-top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%
+  }
+
+  #notePic {
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 648px;
+  margin-top: -30px;
+  overflow:hidden;
+}
