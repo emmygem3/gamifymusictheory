@@ -18,9 +18,11 @@ myPix[10] = "pictures/noteF5.jpg";
 myPix[11] = "pictures/noteG5.jpg";
 myPix[12] = "pictures/noteA5.jpg";
 
+// Randomly selects a picture from the array
 function choosePic() {
   randomNum = Math.floor(Math.random() * myPix.length);
 
+  // Ensures that user will not be presented the same note twice in a row
   while (randomNum == lastRandom) {
     randomNum = Math.floor(Math.random() * myPix.length);
     if (randomNum != lastRandom) {
@@ -30,14 +32,23 @@ function choosePic() {
 
   lastRandom = randomNum;
 
+  // Displays random picture of note to user
   document.getElementById("myPicture").src = myPix[randomNum];
 
-  // -------------------------------------------------------------
-
+  // Increases the tally if the user answers correctly
   document.getElementById("puzzleNum").innerHTML =
     "Puzzle Pieces: <br>" + tally();
   +"/9";
 }
+
+/* --- BUTTON FUNCTIONS --- */
+
+/* 
+  When a button is clicked, the corresponding function does three things:
+  1. Checks if the correct button was clicked
+  2. If the button is correct, increases the tally count by 1
+  3. Chooses a new note for the next round 
+*/
 
 function answerC() {
   document.getElementById("buttC").onclick;
@@ -115,6 +126,9 @@ function answerB() {
   }
 }
 
+/* --- OTHER FUNCTIONS --- */
+
+// I think these two are self explanatory
 function correct() {
   let string = "Correct!";
   document.getElementById("correctness").innerHTML =
@@ -129,10 +143,12 @@ function incorrect() {
 
 let tallyNum = 0;
 
+// Returns whatever the tally is currently
 function tally() {
   return tallyNum + "/9";
 }
 
+// Increments the tally by 1 for every correct answer, and moves to the puzzle portion when the goal is met
 function tallyCount() {
   tallyNum = tallyNum + 1;
 
