@@ -115,8 +115,6 @@ function answerA() {
   }
 }
 
-/* --- OTHER FUNCTIONS --- */
-
 function answerB() {
   document.getElementById("buttB").onclick;
   if (randomNum == 6) {
@@ -127,6 +125,8 @@ function answerB() {
     incorrect();
   }
 }
+
+/* --- OTHER FUNCTIONS --- */
 
 // I think these two are self explanatory
 function correct() {
